@@ -17,9 +17,13 @@ class Matrix{
 		Matrix<T>& operator =(const Matrix<T>&);
 		Matrix(Matrix<T>&&);
 		Matrix<T>& operator =(Matrix<T>&&);
+		int*& operator [](int);
 	public:
+		int get_row();
+		int get_column();
 		void print();
 		void init();
+		
 };
 
 template<typename T>
@@ -109,6 +113,15 @@ Matrix<T>& Matrix<T>::operator=(Matrix<T>&& obj)
 }
 
 template<typename T>
+int*& Matrix<T>::operator [](int i){
+	if (i >= m_row){
+		std::cerr << "Error" << std::endl;
+		std::exit(1);
+	}
+	return m_arr_2d[i];
+}
+
+template<typename T>
 void Matrix<T>::print(){
 	for (int i = 0; i < m_row; i++){
 		for (int j = 0; j < m_column; j++){
@@ -128,5 +141,14 @@ void Matrix<T>::init(){
 	}
 }
 
+template<typename T>
+int Matrix<T>::get_row(){
+	return m_row;
+}
+
+template<typename T>
+int Matrix<T>::get_column(){
+	return m_column;
+}
 
 #endif
